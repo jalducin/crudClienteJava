@@ -12,14 +12,15 @@ public class ClienteController {
         this.service = service;
     }
 
-    @PostMapping
-    public Cliente crear(@RequestBody ClienteDTO dto) {
-        return service.crear(new Cliente(dto.id(), dto.nombre(), dto.email(), dto.edad(), dto.tipoCliente()));
-    }
-
+    // ← Aquí insertas el método listar()
     @GetMapping
     public List<Cliente> listar() {
         return service.listar();
+    }
+
+    @PostMapping
+    public Cliente crear(@RequestBody ClienteDTO dto) {
+        return service.crear(dto.toEntity());
     }
 
     @PutMapping("/{id}")

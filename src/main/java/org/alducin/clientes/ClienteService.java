@@ -1,24 +1,26 @@
 package org.alducin.clientes;
 
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class ClienteService {
     private final ClienteRepository repo;
-    private static final Logger log = Logger.getLogger(ClienteService.class.getName());
+    private final LogService logService;
 
-    public ClienteService(ClienteRepository repo) {
+    public ClienteService(ClienteRepository repo, LogService logService) {
         this.repo = repo;
+        this.logService = logService;
     }
 
     public Cliente crear(Cliente c) {
-        log.info("Creando cliente: " + c.getNombre());
+        logService.logInfo("Creando cliente: " + c.getNombre());
         return repo.save(c);
     }
 
     public List<Cliente> listar() {
+        logService.logInfo("Listando clientes");
         return repo.findAll();
     }
 
@@ -26,20 +28,30 @@ public class ClienteService {
         return repo.findById(id).map(c -> {
             c.setEmail(nuevo.email());
             c.setTipoCliente(nuevo.tipoCliente());
+            logService.logInfo("Actualizando cliente ID: " + id);
             return repo.save(c);
-        }).orElse(null);
+        }).orElseGet(() -> {
+            logService.logError("Cliente no encontrado para actualizar con ID: " + id);
+            return null;
+        });
     }
 
     public void eliminar(String id) {
         repo.deleteById(id);
+        logService.logInfo("Cliente eliminado con ID: " + id);
     }
 
     public String beneficio(String id) {
         return repo.findById(id).map(c -> {
-            return switch (c.getTipoCliente()) {
+            String mensaje = switch (c.getTipoCliente()) {
                 case VIP -> "Cliente VIP: descuento aplicado";
                 case REGULAR -> "Cliente REGULAR: sin descuento";
             };
-        }).orElse("No existe cliente");
+            logService.logInfo("Beneficio consultado para ID: " + id + " → " + mensaje);
+            return mensaje;
+        }).orElseGet(() -> {
+            logService.logError("Cliente no encontrado para beneficio con ID: " + id);
+            return "No existe cliente";
+        });
     }
 }

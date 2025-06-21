@@ -1,3 +1,6 @@
+org\alducin\clientes\LogEntry.class
+org\alducin\clientes\config\SecurityConfig.class
+org\alducin\clientes\LogEntryRepository.class
 org\alducin\clientes\ClienteService.class
 org\alducin\clientes\ClienteService$1.class
 org\alducin\clientes\ClienteController.class
@@ -6,3 +9,4 @@ org\alducin\clientes\ClienteServiceApp.class
 org\alducin\clientes\TipoCliente.class
 org\alducin\clientes\Cliente.class
 org\alducin\clientes\ClienteRepository.class
+org\alducin\clientes\LogService.class

@@ -1,2 +1,2 @@
 # crudClienteJava
-Prueba Técnia
+Prueba Técnica

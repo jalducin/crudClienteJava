@@ -152,7 +152,18 @@ crudClienteJava/
   ```bash
   mvn test
   ```
-* La clase de ejemplo `ClienteControllerTest.java` usa `@SpringBootTest` y `@AutoConfigureMockMvc` con `@WithMockUser` para bypass de seguridad.
+* **Ejecutar un test específico** (por ejemplo, solo `ClienteControllerTest`):
+
+  ```bash
+  mvn -Dtest=ClienteControllerTest test
+  ```
+* **Ubicación de las pruebas**:
+
+  ```plaintext
+  src/test/java/org/alducin/clientes/
+  ├─ ClienteControllerTest.java   # Test de integración REST con MockMvc
+  └─ ClienteServiceTest.java      # Test unitario de la lógica de negocio
+  ```
 
 ---
 
@@ -170,15 +181,18 @@ crudClienteJava/
 
 ## 🔗 Contrato OpenAPI 2.0 (YAML)
 
-En `src/main/resources/openapi.yaml` se encuentra un contrato compatible con OpenAPI 2.0. También puedes acceder desde:
+Este proyecto incluye un archivo local de contrato en `src/main/resources/openapi.yaml` compatible con OpenAPI 2.0.
 
-```
-GET http://localhost:8080/v2/api-docs
-```
+Puedes consultarlo y probarlo de dos maneras:
 
----
+1. **Descargar o ver el YAML directamente** (versión 2.0):
 
-## 🧑‍💻 Autor
+  
+2. **Usar el endpoint de JSON y convertirlo a YAML** (OpenAPI 3.0):
 
-**Juan Valentín Alducin Vázquez**
-Desarrollado para evaluación técnica y portafolio profesional.
+   ```bash
+   http://localhost:8080/v3/api-docs       # JSON puro
+   http://localhost:8080/v3/api-docs.yaml  # YAML generado por springdoc
+   ```
+
+> Para editar o personalizar el YAML 2.0 en tu IDE, abre `src/main/resources/openapi.yaml`.

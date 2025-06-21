@@ -1,0 +1,8 @@
+org\alducin\clientes\ClienteService.class
+org\alducin\clientes\ClienteService$1.class
+org\alducin\clientes\ClienteController.class
+org\alducin\clientes\ClienteDTO.class
+org\alducin\clientes\ClienteServiceApp.class
+org\alducin\clientes\TipoCliente.class
+org\alducin\clientes\Cliente.class
+org\alducin\clientes\ClienteRepository.class
